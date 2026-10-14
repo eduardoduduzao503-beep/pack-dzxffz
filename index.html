@@ -22,14 +22,14 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{
 <main>
 <section class="controls">
 <input id="search" class="wide" placeholder="🔎 Buscar pack ou arquivo..." aria-label="Buscar arquivos">
-<input id="apiKey" class="wide" type="password" autocomplete="off" placeholder="Cole sua chave da API do Google Drive (necessária para carregar)">
+<!-- A chave fica configurada no código abaixo. Restrinja-a no Google Cloud à Google Drive API e ao domínio do site. -->
 <input id="folderId" value="1oKA0p_N3TgrSJJRPtpxB38Ce_Xmk6o7q" placeholder="ID da pasta pública do Drive" aria-label="ID da pasta">
-<button id="load">CARREGAR PACKS DO DRIVE</button>
-<div class="small wide">A pasta precisa estar compartilhada como “Qualquer pessoa com o link — Leitor”. Use uma chave nova e restrinja-a à API Google Drive e ao domínio do seu site.</div>
+<button id="load" type="button">ATUALIZAR PACKS</button>
+<div class="small wide">Os packs carregam automaticamente. A pasta precisa estar compartilhada como “Qualquer pessoa com o link — Leitor”. Configure uma chave restrita no código antes de publicar. O botão serve para atualizar a lista.</div>
 </section>
 <div id="status" class="status">Pronto para carregar os arquivos da pasta pública.</div>
 <section id="files" class="grid" aria-live="polite"></section>
-<details><summary>Como conectar a pasta do Drive</summary><p class="small">1. No Google Cloud Console, habilite Google Drive API no seu projeto.<br>2. Crie uma chave de API nova. Não use uma chave que já foi compartilhada publicamente.<br>3. Restrinja a chave à Google Drive API e, quando possível, ao seu domínio GitHub Pages.<br>4. Cole a chave acima e toque em “Carregar packs”. A chave fica no navegador durante esta sessão e não é salva pelo site.</p></details>
+<details><summary>Como conectar a pasta do Drive</summary><p class="small">1. No Google Cloud Console, habilite a Google Drive API.<br>2. No código, substitua AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo pela sua chave nova.<br>3. Restrinja a chave à Google Drive API e ao domínio GitHub Pages. Mesmo assim, uma chave usada no navegador fica visível no código público; limites e restrições são essenciais.<br>4. Salve o arquivo e publique. A lista carrega automaticamente ao abrir o site.</p></details>
 </main>
 <footer>PACK DZX STORE · Feito para a comunidade DZX</footer>
 <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-label="Prévia do pack">
@@ -41,6 +41,7 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{
 </div>
 <script>
 const $=id=>document.getElementById(id);let allFiles=[];
+const API_KEY = "COLE_SUA_CHAVE_RESTRITA_AQUI";
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function openPreview(f){
   if(f.mimeType==='application/vnd.google-apps.folder'){ $('folderId').value=f.id; $('load').click(); return; }
@@ -68,9 +69,9 @@ function render(){
  if(!list.length&&allFiles.length)$('files').innerHTML='<p class="small">Nenhum resultado para essa busca.</p>';
 }
 $('search').addEventListener('input',render);
-$('load').addEventListener('click',async()=>{
- const key=$('apiKey').value.trim(),folder=$('folderId').value.trim();
- if(!key||!folder){$('status').textContent='Cole a chave de API e confira o ID da pasta.';return;}
+async function loadPacks(){
+ const key=API_KEY.trim(),folder=$('folderId').value.trim();
+ if(!key||key==="COLE_SUA_CHAVE_RESTRITA_AQUI"||!folder){$('status').textContent='Configure a chave de API no código e confira o ID da pasta.';return;}
  $('status').textContent='Carregando arquivos do Google Drive…';$('files').innerHTML='';
  try{
   let pageToken='',items=[];
@@ -86,6 +87,8 @@ $('load').addEventListener('click',async()=>{
   $('status').textContent=allFiles.length?`Encontrados ${allFiles.length} item(ns). Toque em “Ver prévia” para visualizar dentro do site.`:'A pasta foi consultada, mas não foram encontrados arquivos visíveis. Confira o compartilhamento e o ID da pasta.';
  }catch(e){$('status').textContent='Não foi possível carregar: '+e.message+'. Confira a chave, as permissões e se a Google Drive API está habilitada.';}
 });
+$('load').addEventListener('click',loadPacks);
+window.addEventListener('DOMContentLoaded',loadPacks);
 </script>
 </body>
 </html>
