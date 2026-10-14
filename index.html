@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PACK DZX STORE</title>
 <style>
-:root{--bg:#09070e;--panel:#15111e;--purple:#a855f7;--text:#f8f5ff;--muted:#b9adc9;--line:#33253f}
+:root{--purple:#a855f7;--text:#f8f5ff;--muted:#b9adc9;--line:#33253f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#241034 0,#09070e 48%);color:var(--text);font:16px system-ui,Arial,sans-serif}
 header{padding:30px 18px 22px;text-align:center;border-bottom:1px solid var(--line)}.logo{font-size:clamp(28px,7vw,48px);font-weight:900;letter-spacing:1px;text-shadow:0 0 24px #a855f788}.logo span{color:var(--purple)}header p{margin:8px 0 0;color:var(--muted)}
 main{max-width:1000px;margin:auto;padding:18px}.controls{display:grid;grid-template-columns:1fr;gap:10px;background:#100c18;border:1px solid var(--line);padding:14px;border-radius:16px}
@@ -13,7 +12,7 @@ input,button{font:inherit;border-radius:10px;padding:12px;border:1px solid #4934
 .item{background:linear-gradient(145deg,#1b1425,#100d16);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}.item h3{font-size:16px;overflow-wrap:anywhere;margin:0 0 8px}.kind{font-size:12px;color:#d8b4fe;margin-bottom:10px}
 .actions{display:flex;gap:8px;flex-wrap:wrap}.actions button,.actions a{flex:1;text-align:center;min-width:95px;font-size:14px;padding:9px 10px;border-radius:9px;text-decoration:none;font-weight:800;cursor:pointer}.preview-btn{color:#fff;background:linear-gradient(100deg,#7e22ce,#c026d3);border:0}.download-btn{display:inline-block;color:#e9d5ff;background:#0b0910;border:1px solid #69418a}
 footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{margin-top:12px;background:#100c18;border:1px solid var(--line);border-radius:12px;padding:12px}summary{cursor:pointer;font-weight:700}
-.modal{position:fixed;inset:0;z-index:20;background:#05030bee;display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modal-box{width:min(100%,1000px);height:min(92vh,850px);display:flex;flex-direction:column;background:#130e1b;border:1px solid #69418a;border-radius:16px;overflow:hidden;box-shadow:0 15px 60px #000}.modal-head{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line)}.modal-title{flex:1;overflow-wrap:anywhere;font-weight:800}.modal-head button{width:auto;padding:8px 12px}.modal-frame{width:100%;flex:1;border:0;background:#fff}.modal-foot{padding:10px;border-top:1px solid var(--line)}.modal-foot a{display:block;text-align:center;text-decoration:none;color:white;background:linear-gradient(100deg,#7e22ce,#c026d3);padding:12px;border-radius:10px;font-weight:900}
+.modal{position:fixed;inset:0;z-index:20;background:#05030bee;display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modal-box{width:min(100%,1000px);height:min(92vh,850px);display:flex;flex-direction:column;background:#130e1b;border:1px solid #69418a;border-radius:16px;overflow:hidden}.modal-head{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line)}.modal-title{flex:1;overflow-wrap:anywhere;font-weight:800}.modal-head button{width:auto;padding:8px 12px}.modal-frame{width:100%;flex:1;border:0;background:#fff}.modal-foot{padding:10px;border-top:1px solid var(--line)}.modal-foot a{display:block;text-align:center;text-decoration:none;color:white;background:linear-gradient(100deg,#7e22ce,#c026d3);padding:12px;border-radius:10px;font-weight:900}
 @media(min-width:650px){.controls{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}}
 </style>
 </head>
@@ -22,38 +21,31 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{
 <main>
 <section class="controls">
 <input id="search" class="wide" placeholder="🔎 Buscar pack ou arquivo..." aria-label="Buscar arquivos">
-<!-- A chave fica configurada no código abaixo. Restrinja-a no Google Cloud à Google Drive API e ao domínio do site. -->
-<input id="folderId" value="1oKA0p_N3TgrSJJRPtpxB38Ce_Xmk6o7q" placeholder="ID da pasta pública do Drive" aria-label="ID da pasta">
+<input id="folderId" class="wide" value="1oKA0p_N3TgrSJJRPtpxB38Ce_Xmk6o7q" placeholder="ID da pasta pública do Drive" aria-label="ID da pasta">
 <button id="load" type="button">ATUALIZAR PACKS</button>
-<div class="small wide">Os packs carregam automaticamente. A pasta precisa estar compartilhada como “Qualquer pessoa com o link — Leitor”. Configure uma chave restrita no código antes de publicar. O botão serve para atualizar a lista.</div>
+<div class="small wide">Os packs carregam automaticamente. A pasta precisa estar compartilhada como “Qualquer pessoa com o link — Leitor”.</div>
 </section>
-<div id="status" class="status">Pronto para carregar os arquivos da pasta pública.</div>
+<div id="status" class="status">Conectando ao Google Drive…</div>
 <section id="files" class="grid" aria-live="polite"></section>
-<details><summary>Como conectar a pasta do Drive</summary><p class="small">1. No Google Cloud Console, habilite a Google Drive API.<br>2. No código, substitua AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo pela sua chave nova.<br>3. Restrinja a chave à Google Drive API e ao domínio GitHub Pages. Mesmo assim, uma chave usada no navegador fica visível no código público; limites e restrições são essenciais.<br>4. Salve o arquivo e publique. A lista carrega automaticamente ao abrir o site.</p></details>
+<details><summary>Problemas para carregar?</summary><p class="small">Confira se a Google Drive API está habilitada, se a chave tem restrição correta e se a pasta está compartilhada como “Qualquer pessoa com o link — Leitor”. Por segurança, não compartilhe a chave em prints ou mensagens.</p></details>
 </main>
 <footer>PACK DZX STORE · Feito para a comunidade DZX</footer>
 <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-label="Prévia do pack">
-  <div class="modal-box">
-    <div class="modal-head"><div class="modal-title" id="previewTitle">Prévia do pack</div><button id="closePreview" aria-label="Fechar prévia">FECHAR ✕</button></div>
-    <iframe class="modal-frame" id="previewFrame" title="Prévia do arquivo" allow="autoplay"></iframe>
-    <div class="modal-foot"><a id="modalDownload" href="#" target="_blank" rel="noopener">⬇ BAIXAR PACK</a></div>
-  </div>
-</div>
+<div class="modal-box"><div class="modal-head"><div class="modal-title" id="previewTitle">Prévia do pack</div><button id="closePreview">FECHAR ✕</button></div>
+<iframe class="modal-frame" id="previewFrame" title="Prévia do arquivo" allow="autoplay"></iframe>
+<div class="modal-foot"><a id="modalDownload" href="#" target="_blank" rel="noopener">⬇ BAIXAR PACK</a></div></div></div>
 <script>
-const $=id=>document.getElementById(id);let allFiles=[];
+const $=id=>document.getElementById(id);
+let allFiles=[];
 const API_KEY = "AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo";
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function openPreview(f){
-  if(f.mimeType==='application/vnd.google-apps.folder'){ $('folderId').value=f.id; $('load').click(); return; }
-  const previewUrl=`https://drive.google.com/file/d/${encodeURIComponent(f.id)}/preview`;
-  const downloadUrl=`https://drive.google.com/uc?export=download&id=${encodeURIComponent(f.id)}`;
-  $('previewTitle').textContent=f.name;
-  $('previewFrame').src=previewUrl;
-  $('modalDownload').href=downloadUrl;
-  $('previewModal').classList.add('open');
-  document.body.style.overflow='hidden';
+ if(f.mimeType==='application/vnd.google-apps.folder'){ $('folderId').value=f.id; loadPacks(); return; }
+ $('previewTitle').textContent=f.name;
+ $('previewFrame').src=`https://drive.google.com/file/d/${encodeURIComponent(f.id)}/preview`;
+ $('modalDownload').href=`https://drive.google.com/uc?export=download&id=${encodeURIComponent(f.id)}`;
+ $('previewModal').classList.add('open');document.body.style.overflow='hidden';
 }
-function closePreview(){ $('previewModal').classList.remove('open'); $('previewFrame').src='about:blank'; document.body.style.overflow=''; }
+function closePreview(){ $('previewModal').classList.remove('open');$('previewFrame').src='about:blank';document.body.style.overflow='';}
 $('closePreview').addEventListener('click',closePreview);
 $('previewModal').addEventListener('click',e=>{if(e.target===$('previewModal'))closePreview();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closePreview();});
@@ -63,20 +55,21 @@ function render(){
  $('files').innerHTML=list.map(f=>{
   const folder=f.mimeType==='application/vnd.google-apps.folder';
   const downloadUrl=`https://drive.google.com/uc?export=download&id=${encodeURIComponent(f.id)}`;
-  return `<article class="item"><div class="kind">${folder?'📁 PASTA':'📦 ARQUIVO'}</div><h3>${esc(f.name)}</h3><div class="actions"><button class="preview-btn" data-preview="${esc(f.id)}">${folder?'ABRIR PASTA':'👀 VER PRÉVIA'}</button>${folder?'':`<a class="download-btn" href="${downloadUrl}" target="_blank" rel="noopener">⬇ BAIXAR</a>`}</div></article>`;
+  return `<article class="item"><div class="kind">${folder?'📁 PASTA':'📦 ARQUIVO'}</div><h3>${escapeHtml(f.name)}</h3><div class="actions"><button class="preview-btn" data-id="${escapeHtml(f.id)}">${folder?'ABRIR PASTA':'👀 VER PRÉVIA'}</button>${folder?'':`<a class="download-btn" href="${downloadUrl}" target="_blank" rel="noopener">⬇ BAIXAR</a>`}</div></article>`;
  }).join('');
- $('files').querySelectorAll('[data-preview]').forEach(btn=>btn.addEventListener('click',()=>{const f=allFiles.find(x=>x.id===btn.dataset.preview);if(f)openPreview(f);}));
+ $('files').querySelectorAll('[data-id]').forEach(btn=>btn.addEventListener('click',()=>{const f=allFiles.find(x=>x.id===btn.dataset.id);if(f)openPreview(f);}));
  if(!list.length&&allFiles.length)$('files').innerHTML='<p class="small">Nenhum resultado para essa busca.</p>';
 }
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 $('search').addEventListener('input',render);
 async function loadPacks(){
- const key=API_KEY.trim(),folder=$('folderId').value.trim();
- if(!key||key==="AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo"||!folder){$('status').textContent='Configure a chave de API no código e confira o ID da pasta.';return;}
+ const folder=$('folderId').value.trim();
  $('status').textContent='Carregando arquivos do Google Drive…';$('files').innerHTML='';
+ if(!API_KEY||!folder){$('status').textContent='Falta configurar a chave ou o ID da pasta.';return;}
  try{
   let pageToken='',items=[];
   do{
-   const params=new URLSearchParams({q:`'${folder.replace(/'/g,"\\'")}' in parents and trashed = false`,key,fields:'nextPageToken,files(id,name,mimeType)',pageSize:'100',orderBy:'name',supportsAllDrives:'true',includeItemsFromAllDrives:'true'});
+   const params=new URLSearchParams({q:`'${folder.replace(/'/g,"\\'")}' in parents and trashed = false`,key:API_KEY,fields:'nextPageToken,files(id,name,mimeType)',pageSize:'100',orderBy:'name'});
    if(pageToken)params.set('pageToken',pageToken);
    const r=await fetch('https://www.googleapis.com/drive/v3/files?'+params.toString());
    const data=await r.json();
@@ -84,11 +77,11 @@ async function loadPacks(){
    items=items.concat(data.files||[]);pageToken=data.nextPageToken||'';
   }while(pageToken);
   allFiles=items;render();
-  $('status').textContent=allFiles.length?`Encontrados ${allFiles.length} item(ns). Toque em “Ver prévia” para visualizar dentro do site.`:'A pasta foi consultada, mas não foram encontrados arquivos visíveis. Confira o compartilhamento e o ID da pasta.';
- }catch(e){$('status').textContent='Não foi possível carregar: '+e.message+'. Confira a chave, as permissões e se a Google Drive API está habilitada.';}
-});
+  $('status').textContent=allFiles.length?`Encontrados ${allFiles.length} item(ns). Toque em “Ver prévia” para visualizar dentro do site.`:'Nenhum item encontrado. Confira o compartilhamento e o ID da pasta.';
+ }catch(e){$('status').textContent='Erro ao carregar: '+e.message+'. Confira a chave, a Google Drive API e o compartilhamento da pasta.';}
+}
 $('load').addEventListener('click',loadPacks);
-window.addEventListener('DOMContentLoaded',loadPacks);
+loadPacks();
 </script>
 </body>
 </html>
