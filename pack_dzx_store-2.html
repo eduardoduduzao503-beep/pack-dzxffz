@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pack DZX Store</title>
+<style>
+:root{color-scheme:dark;--bg:#09090d;--panel:#14141d;--panel2:#1c1b27;--text:#f8f7ff;--muted:#aaa6bb;--purple:#a855f7;--purple2:#7c3aed;--line:#30283d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#28113d 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,64px);border-bottom:1px solid #292331;background:#0b0a10d9;position:sticky;top:0;backdrop-filter:blur(14px);z-index:2}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.3px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(140deg,#d8b4fe,#7e22ce);color:#160821;font-weight:1000;font-size:20px;box-shadow:0 0 28px #a855f744}.brand span{color:#c084fc}
+.pill{font-size:12px;border:1px solid #553177;color:#d8b4fe;background:#1d1029;padding:8px 12px;border-radius:999px}
+main{max-width:1080px;margin:auto;padding:54px 22px 70px}.hero{padding:28px 0 34px}.eyebrow{color:#c084fc;font-size:12px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase}.hero h1{font-size:clamp(36px,7vw,66px);line-height:1.03;letter-spacing:-2px;margin:14px 0}.hero h1 em{font-style:normal;color:#c084fc}.hero p{max-width:600px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 30px}.search{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;color:var(--text);font:inherit;outline:none}.search:focus,input:focus{border-color:var(--purple)}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 15px}.section-head h2{font-size:18px;margin:0}.section-head small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.card{background:linear-gradient(145deg,#17151f,#101016);border:1px solid var(--line);border-radius:18px;padding:20px;min-height:170px;display:flex;flex-direction:column;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#7840a4;box-shadow:0 12px 32px #0005}.file-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#321b46;color:#d8b4fe;font-size:23px;margin-bottom:20px}.card h3{font-size:16px;margin:0 0 7px}.card p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 18px;flex:1}.linkbtn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid #6d3a92;color:#f3e8ff;background:#281336;border-radius:10px;padding:11px 13px;font-weight:750;text-decoration:none;cursor:pointer;font:inherit;font-size:13px}.linkbtn:hover{background:#3b1a51}.linkbtn.primary{background:linear-gradient(110deg,#9333ea,#6d28d9);border:0;color:white}.setup{margin-top:34px;padding:22px;border:1px solid var(--line);border-radius:18px;background:#111018}.setup h2{font-size:18px;margin:0 0 8px}.setup p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 16px}.inputrow{display:flex;gap:10px}.inputrow input{min-width:0;flex:1;border:1px solid var(--line);background:#09090d;border-radius:10px;padding:13px;color:var(--text);font:inherit}.note{font-size:12px!important;margin-top:12px!important}.status{display:none;color:#d8b4fe;font-size:13px;margin-top:12px}footer{border-top:1px solid #292331;padding:22px;text-align:center;color:#817b91;font-size:12px}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:25px}.inputrow{flex-direction:column}}
+@media(max-width:440px){.grid{grid-template-columns:1fr}.card{min-height:150px}header{padding:0 16px}.pill{font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">D</div><div>PACK <span>DZX STORE</span></div></div><div class="pill">✦ ACESSO POR LINK</div></header>
+<main>
+<section class="hero"><div class="eyebrow">Sua central de packs</div><h1>PACK <em>DZX STORE</em></h1><p>Seu espaço para packs, arquivos e conteúdos. Escolha uma categoria abaixo para acessar os materiais compartilhados.</p></section>
+<div class="toolbar"><input class="search" id="search" placeholder="⌕  Buscar packs e categorias..." aria-label="Buscar packs e categorias"></div>
+<div class="section-head"><h2>Explorar conteúdos</h2><small id="count">4 categorias</small></div>
+<section class="grid" id="cards">
+<article class="card" data-search="packs arquivos principais"><div class="file-icon">▣</div><h3>Pack principal</h3><p>Acesse a pasta principal com os arquivos e packs disponíveis.</p><button class="linkbtn" data-category="principal">Abrir pasta ↗</button></article>
+<article class="card" data-search="fotos imagens wallpapers"><div class="file-icon">▧</div><h3>Fotos e wallpapers</h3><p>Imagens, fundos de tela e conteúdos visuais.</p><button class="linkbtn" data-category="fotos">Abrir pasta ↗</button></article>
+<article class="card" data-search="jogos mods gamer"><div class="file-icon">⌘</div><h3>Games e mods</h3><p>Arquivos relacionados a jogos e personalizações.</p><button class="linkbtn" data-category="jogos">Abrir pasta ↗</button></article>
+<article class="card" data-search="extras novos outros arquivos"><div class="file-icon">✧</div><h3>Extras</h3><p>Outros arquivos e novidades da DZX Store.</p><button class="linkbtn" data-category="extras">Abrir pasta ↗</button></article>
+</section>
+<section class="setup"><h2>⚙ Conectar sua pasta do Google Drive</h2><p>Cole o link compartilhável da sua pasta. Depois, os botões de categoria poderão abrir esse link. Para pastas públicas, ajuste o compartilhamento no Drive para “Qualquer pessoa com o link”.</p><div class="inputrow"><input id="driveLink" type="url" placeholder="https://drive.google.com/drive/folders/..." aria-label="Link da pasta do Google Drive"><button class="linkbtn primary" id="save">Usar link</button></div><p class="note">Este protótipo salva o link apenas nesta página aberta. Ele não faz login na sua conta nem altera as permissões do Drive.</p><div class="status" id="status" role="status"></div></section>
+</main>
+<footer>PACK DZX STORE · Feito para compartilhar conteúdos com facilidade</footer>
+<script>
+let folderUrl='https://drive.google.com/drive/folders/1oKA0p_N3TgrSJJRPtpxB38Ce_Xmk6o7q';
+const input=document.getElementById('driveLink'),status=document.getElementById('status');
+input.value=folderUrl;
+document.getElementById('save').addEventListener('click',()=>{
+ const value=input.value.trim();
+ try{const u=new URL(value);if(!['https:','http:'].includes(u.protocol)||!/(^|\.)drive\.google\.com$/.test(u.hostname))throw new Error();folderUrl=u.href;status.textContent='Link adicionado nesta sessão. Os botões de pasta vão abrir o Drive.';status.style.display='block';}
+ catch(e){status.textContent='Cole um link válido do Google Drive (drive.google.com).';status.style.display='block';folderUrl='';}
+});
+document.querySelectorAll('[data-category]').forEach(btn=>btn.addEventListener('click',()=>{
+ if(folderUrl)window.open(folderUrl,'_blank','noopener,noreferrer');
+ else{input.focus();status.textContent='Primeiro, cole o link da sua pasta do Google Drive acima.';status.style.display='block';}
+}));
+document.getElementById('search').addEventListener('input',e=>{
+ const q=e.target.value.toLocaleLowerCase('pt-BR');let visible=0;
+ document.querySelectorAll('#cards .card').forEach(card=>{const show=(card.dataset.search+' '+card.innerText).toLocaleLowerCase('pt-BR').includes(q);card.style.display=show?'flex':'none';if(show)visible++;});
+ document.getElementById('count').textContent=visible+' categoria(s)';
+});
+</script>
+</body>
+</html>
