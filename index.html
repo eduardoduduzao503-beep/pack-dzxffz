@@ -29,7 +29,7 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{
 </section>
 <div id="status" class="status">Pronto para carregar os arquivos da pasta pública.</div>
 <section id="files" class="grid" aria-live="polite"></section>
-<details><summary>Como conectar a pasta do Drive</summary><p class="small">1. No Google Cloud Console, habilite a Google Drive API.<br>2. No código, AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo .<br>3. Restrinja a chave à Google Drive API e ao domínio GitHub Pages. Mesmo assim, uma chave usada no navegador fica visível no código público; limites e restrições são essenciais.<br>4. Salve o arquivo e publique. A lista carrega automaticamente ao abrir o site.</p></details>
+<details><summary>Como conectar a pasta do Drive</summary><p class="small">1. No Google Cloud Console, habilite a Google Drive API.<br>2. No código, substitua AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo pela sua chave nova.<br>3. Restrinja a chave à Google Drive API e ao domínio GitHub Pages. Mesmo assim, uma chave usada no navegador fica visível no código público; limites e restrições são essenciais.<br>4. Salve o arquivo e publique. A lista carrega automaticamente ao abrir o site.</p></details>
 </main>
 <footer>PACK DZX STORE · Feito para a comunidade DZX</footer>
 <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-label="Prévia do pack">
@@ -41,7 +41,7 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}details{
 </div>
 <script>
 const $=id=>document.getElementById(id);let allFiles=[];
-const API_KEY = "COLE_SUA_CHAVE_RESTRITA_AQUI";
+const API_KEY = "AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo";
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function openPreview(f){
   if(f.mimeType==='application/vnd.google-apps.folder'){ $('folderId').value=f.id; $('load').click(); return; }
@@ -71,7 +71,7 @@ function render(){
 $('search').addEventListener('input',render);
 async function loadPacks(){
  const key=API_KEY.trim(),folder=$('folderId').value.trim();
- if(!key||key==="COLE_SUA_CHAVE_RESTRITA_AQUI"||!folder){$('status').textContent='Configure a chave de API no código e confira o ID da pasta.';return;}
+ if(!key||key==="AIzaSyBF331XxTTYTFkErnT1dVzZ70noUmwrFgo"||!folder){$('status').textContent='Configure a chave de API no código e confira o ID da pasta.';return;}
  $('status').textContent='Carregando arquivos do Google Drive…';$('files').innerHTML='';
  try{
   let pageToken='',items=[];
